@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="echarts.min.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 100%;height:566px;text-align:center"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+var hours = ['1830', '1862', '1891', '1931', '1952', '1985', '1986', '1990', '1992', '1994', '1995', '1996', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2010', '2011', '2012', '2013',
+    '2014', '2015', '2016', '2017', '2018', '2019', '2020'
+];
+var days = ['国内品牌\n创立',
+    '国外品牌\n进入\n中国市场'
+];
+
+var data = [
+    [0, 0, 1, "扬州谢馥春"],
+    [0, 1, 1, "杭州孔凤春"],
+    [0, 2, 1, "双妹"],
+    [0, 3, 1, "百雀羚"],
+    [0, 4, 1, "上海家化"],
+    [0, 5, 1, "大宝"],
+    [0, 6, 1, "高姿"],
+    [0, 8, 4, "小护士 羽西 雅邦 高夫"],
+    [0, 9, 2, "欧诗漫 京润珍珠"],
+    [0, 10, 1, "丁家宜"],
+    [0, 11, 1, "雅丽洁"],
+    [0, 12, 1, "水密码"],
+    [0, 13, 1, "美肤宝 娇兰佳人"],
+    [0, 14, 1, "毛戈平"],
+    [0, 15, 2, "卡姿兰 尚惠"],
+    [0, 16, 1, "上海上美 活泉"],
+    [0, 17, 4, "佰草集 美肤宝 春纪 珀莱雅 韩束 相宜本草 丸美 自然堂"],
+    [0, 19, 1, "美康粉黛"],
+       [1, 19, 1, "M.A.C 、Bobbi Brown"],
+    [0, 20, 4, "玛丽黛佳 兰瑟 温碧泉 健美创研"],
+    [0, 21, 2, "春纪 伊贝诗"],
+    [1, 21, 2, "贝玲妃"],
+    [0, 22, 2, "薇诺娜 素萃"],
+    [0, 23, 3, "植美村 WIS 雪玲妃"],
+    [0, 24, 1, "稚优泉"],
+    [0, 25, 1, "三生花"],
+    [0, 26, 1, "养生堂"],
+    [0, 27, 1, "HomeFacialPro 麦吉丽 葵儿 土家硒泥坊"],
+    [0, 28, 1, "寻荟记 透真"],
+    [0, 29, 1, "橘朵"],
+    [0, 30, 2, "完美日记 粉瑟"],
+    [1, 6, 1, "旁氏"],
+    [1, 7, 2, "雅芳、美国庄臣收购美加净"],
+    [1, 8, 1, "兰蔻"],
+    [1, 9, 1, "Nivea"],
+    [1, 10, 1, "香奈儿"],
+    [1, 11, 4, "宝洁 欧莱雅 雅诗兰黛 联合利华 资生堂 LVMH"],
+    [1, 12, 2, "SK-II"],
+    [1, 15, 1, "资生堂"],
+    [1, 17, 1, "植村秀"],
+    [1, 18, 2, "欧莱雅收购小护士、羽西"],
+    [1, 22, 2, "Max Factor、强生收购大宝、Giorgio Armani"],
+        [1, 30, 2, "NARS"],
+            [1, 32, 2, "TOM FORD Fenty Beauty"],
+                [1, 32, 2, "完美日记 粉瑟"],
+];
+data = data.map(function(item) {
+    return [item[1], item[0], item[2], item[3]];
+});
+
+option = {
+    title: {
+        text: '国内外一些知名美妆品牌进入中国市场（创立）的时间',
+        subtext: 'Time for some famous domestic and foreign beauty brands to enter the Chinese market',
+        x: 'center',
+        y: '80',
+        textStyle: {
+            fontSize: 20,
+            fontWeight: 'bold',
+            fontFamily: 'Microsoft YaHei',
+            color: '#ffffff'
+        },
+        subtextStyle: {
+            fontStyle: 'italic',
+            fontSize: 10,
+            color: '#BEBEBE'
+        }
+    },
+    legend: {
+        data: ['圆点大小即品牌数量多少'],
+        left: 'right',
+        y: '140',
+        textStyle: {
+            fontSize: 15,
+            color: '#',
+            fontFamily: 'KaiTi'
+        },
+    },
+    tooltip: {
+        position: 'top',
+        formatter: function(params) {
+            return params.value[3] + '等  　  年份：' + hours[params.value[0]];
+        }
+    },
+    grid: {
+        left: 20,
+        bottom: 100,
+        top: 190,
+        right: 50,
+        containLabel: true
+    },
+    xAxis: {
+        type: 'category',
+        data: hours,
+        boundaryGap: false,
+        axisLabel: {
+            color: '#F0F0F0',
+            fontSize: 0
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#fff',
+                type: 'dashed'
+            }
+        },
+        axisLine: {
+            show: false
+        }
+    },
+    yAxis: {
+        type: 'category',
+        data: days,
+        axisLabel: {
+            color: '#F0F0F0',
+            fontSize: 18,
+            fontFamily: 'KaiTi'
+        },
+        axisLine: {
+            show: false
+        }
+    },
+    series: [{
+        name: '圆点大小即品牌数量多少',
+        type: 'scatter',
+        symbolSize: function(val) {
+            return val[2] * 7;
+        },
+        data: data
+    }, ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
